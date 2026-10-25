@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>同窓会ディナー比較プラン（3人日帰り）</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Zen Kaku Gothic New & Shippori Mincho -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Zen Kaku Gothic New"', 'sans-serif'],
+            serif: ['"Shippori Mincho"', 'serif'],
+          },
+          colors: {
+            brand: {
+              gold: '#D4AF37',
+              goldLight: '#F3E5AB',
+              goldDark: '#997F24',
+              dark: '#14171A',
+              card: '#1F242A',
+              border: '#2E353F',
+              accent: '#C5A059'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* スムーズスクロール */
+    html {
+      scroll-behavior: smooth;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #3a424e;
+      border-radius: 9999px;
+    }
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #AA7C11 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="bg-[#101215] text-stone-200 font-sans antialiased min-h-screen pb-24 selection:bg-brand-gold selection:text-black">
+
+  <!-- ヘッダー -->
+  <header class="relative overflow-hidden border-b border-brand-border bg-gradient-to-b from-[#181C22] to-[#101215] pt-10 pb-8 px-5 text-center">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-gold/40 bg-brand-gold/10 text-brand-gold text-xs font-medium mb-3">
+      <span>🥂</span> 3人で行く極上肉ディナー同窓会
+    </div>
+    <h1 class="text-2xl sm:text-3xl font-serif font-bold text-white tracking-wide leading-snug">
+      日帰りディナー候補プラン
+    </h1>
+    <p class="text-xs sm:text-sm text-stone-400 mt-2 max-w-md mx-auto leading-relaxed">
+      午後からゆったり出発して夜に贅沢を味わう3つの提案です。<br class="hidden sm:inline">好みのプランを選んで投票・LINE返信できます。
+    </p>
+  </header>
+
+  <!-- メインコンテナ -->
+  <main class="max-w-2xl mx-auto px-4 mt-6 space-y-8">
+
+    <!-- 一目でわかるサマリー比較表 -->
+    <section class="bg-brand-card/70 border border-brand-border rounded-2xl p-4 sm:p-5 shadow-xl backdrop-blur-sm">
+      <div class="flex items-center justify-between mb-3 border-b border-brand-border/60 pb-2">
+        <h2 class="text-sm font-bold text-stone-200 flex items-center gap-1.5">
+          <span class="text-brand-gold">📊</span> 3プランのざっくり比較
+        </h2>
+        <span class="text-[11px] text-stone-400">※すべて1人あたりの目安</span>
+      </div>
+
+      <div class="overflow-x-auto custom-scrollbar -mx-2 px-2 pb-1">
+        <table class="w-full text-xs text-left border-collapse min-w-[360px]">
+          <thead>
+            <tr class="text-stone-400 border-b border-brand-border/50">
+              <th class="py-2 px-2 font-medium">プラン</th>
+              <th class="py-2 px-2 font-medium">移動・手段</th>
+              <th class="py-2 px-2 font-medium text-right">総予算目安</th>
+              <th class="py-2 px-2 font-medium text-center">帰着目安</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-brand-border/40 text-stone-300">
+            <tr class="hover:bg-white/5 transition-colors cursor-pointer" onclick="switchTab('planA')">
+              <td class="py-2.5 px-2 font-bold text-amber-400">A. 一升瓶 本店</td>
+              <td class="py-2.5 px-2 text-stone-300">車（片道約1.7h）</td>
+              <td class="py-2.5 px-2 text-right font-medium text-white">約1.1〜1.3万</td>
+              <td class="py-2.5 px-2 text-center text-stone-400">20:45</td>
+            </tr>
+            <tr class="hover:bg-white/5 transition-colors cursor-pointer" onclick="switchTab('planB')">
+              <td class="py-2.5 px-2 font-bold text-yellow-500">B. 和田金</td>
+              <td class="py-2.5 px-2 text-stone-300">車（片道約1.7h）</td>
+              <td class="py-2.5 px-2 text-right font-medium text-white">約2.6〜3.0万</td>
+              <td class="py-2.5 px-2 text-center text-stone-400">21:15</td>
+            </tr>
+            <tr class="hover:bg-white/5 transition-colors cursor-pointer" onclick="switchTab('planC')">
+              <td class="py-2.5 px-2 font-bold text-orange-400">C. 神戸牛</td>
+              <td class="py-2.5 px-2 text-stone-300">車＋新快速（約3h）</td>
+              <td class="py-2.5 px-2 text-right font-medium text-white">約2.5〜3.2万</td>
+              <td class="py-2.5 px-2 text-center text-stone-400">22:45</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- タブ切り替えナビゲーション -->
+    <div class="sticky top-2 z-20 bg-[#101215]/90 backdrop-blur-md p-1.5 rounded-xl border border-brand-border shadow-lg flex items-center justify-between gap-1">
+      <button onclick="switchTab('planA')" id="tabBtn-planA" class="tab-btn flex-1 py-2 px-2 rounded-lg text-xs font-bold transition-all duration-200 text-stone-300 bg-transparent flex flex-col items-center">
+        <span>【A】一升瓶</span>
+        <span class="text-[10px] opacity-75 font-normal">気兼ねなく旨い肉</span>
+      </button>
+      <button onclick="switchTab('planB')" id="tabBtn-planB" class="tab-btn flex-1 py-2 px-2 rounded-lg text-xs font-bold transition-all duration-200 text-stone-300 bg-transparent flex flex-col items-center">
+        <span>【B】和田金</span>
+        <span class="text-[10px] opacity-75 font-normal">至高の個室すき焼</span>
+      </button>
+      <button onclick="switchTab('planC')" id="tabBtn-planC" class="tab-btn flex-1 py-2 px-2 rounded-lg text-xs font-bold transition-all duration-200 text-stone-300 bg-transparent flex flex-col items-center">
+        <span>【C】神戸牛</span>
+        <span class="text-[10px] opacity-75 font-normal">鉄板焼き＆夜景</span>
+      </button>
+    </div>
+
+    <!-- ==================== PLAN A ==================== -->
+    <div id="panel-planA" class="plan-panel space-y-5 animate-fade-in">
+      <!-- 概要カード -->
+      <div class="bg-brand-card border border-brand-border rounded-2xl p-5 shadow-lg relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-28 h-28 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="flex items-center gap-2 mb-2">
+          <span class="px-2.5 py-0.5 rounded-md text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">候補 A</span>
+          <span class="text-xs text-stone-400">移動：車（三重県松阪市）</span>
+        </div>
+        <h3 class="text-xl font-bold font-serif text-white tracking-wide">
+          松阪「一升瓶 本店」夕食プラン
+        </h3>
+        <p class="text-xs sm:text-sm text-stone-300 mt-2.5 leading-relaxed">
+          移動が近くて最もラク！A5松阪牛焼肉と名物味噌ダレホルモンを心ゆくまで気兼ねなく堪能。夜20時台には帰宅できる無理のない定番おすすめプランです。
+        </p>
+
+        <!-- 費用ボックス -->
+        <div class="mt-4 p-3.5 bg-black/40 rounded-xl border border-brand-border/60 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <span class="text-[11px] text-stone-400">1人あたりの総費用目安</span>
+            <div class="text-lg font-bold text-amber-300">約 11,000 〜 13,500 円</div>
+          </div>
+          <div class="text-xs text-stone-400 sm:text-right space-y-0.5 border-t sm:border-t-0 pt-1 sm:pt-0 border-white/10">
+            <div>交通費（車3等分）：約 4,000〜4,500円</div>
+            <div>夕食代（特選焼肉・酒等）：約 7,000〜9,000円</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- タイムライン -->
+      <div class="bg-brand-card border border-brand-border rounded-2xl p-5 shadow-lg">
+        <h4 class="text-xs font-bold text-brand-gold uppercase tracking-widest mb-4 flex items-center gap-1.5">
+          <span>🕒</span> 当日のスケジュール
+        </h4>
+        <div class="relative pl-6 border-l-2 border-amber-500/40 space-y-5 text-xs sm:text-sm">
+          <div class="relative group">
+            <div class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#101215] border-2 border-amber-400"></div>
+            <div class="font-bold text-white flex items-center gap-2">
+              <span class="text-amber-300 font-mono text-sm">14:00</span> 地元を出発
+            </div>
+            <p class="text-stone-400 text-xs mt-0.5">知多・三河エリアから伊勢湾岸道・東名阪道・伊勢道で松阪へ（車で約1時間40分）</p>
+          </div>
+
+          <div class="relative group">
+            <div class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#101215] border-2 border-amber-400"></div>
+            <div class="font-bold text-white flex items-center gap-2">
+              <span class="text-amber-300 font-mono text-sm">15:45</span> 松阪到着・歴史散策
+            </div>
+            <p class="text-stone-400 text-xs mt-0.5">松阪城跡や槙垣が美しい「御城番屋敷」を散歩。お土産購入やカフェで一服</p>
+          </div>
+
+          <div class="relative group">
+            <div class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-amber-400 ring-4 ring-amber-400/20"></div>
+            <div class="font-bold text-amber-200 flex items-center gap-2 text-sm sm:text-base">
+              <span class="text-amber-300 font-mono">17:00</span> 「一升瓶 本店」で夕食
+            </div>
+            <p class="text-stone-300 text-xs mt-0.5">夜営業の開店直後にスムーズ入店。A5等級の特選松阪牛や味噌ダレを堪能（約2時間）</p>
+          </div>
+
+          <div class="relative group">
+            <div class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#101215] border-2 border-amber-400"></div>
+            <div class="font-bold text-white flex items-center gap-2">
+              <span class="text-amber-300 font-mono text-sm">19:00</span> 松阪出発
+            </div>
+            <p class="text-stone-400 text-xs mt-0.5">夜の高速道路で渋滞もなくスイスイ帰路へ</p>
+          </div>
+
+          <div class="relative group">
+            <div class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#101215] border-2 border-amber-400"></div>
+            <div class="font-bold text-white flex items-center gap-2">
+              <span class="text-amber-300 font-mono text-sm">20:45</span> 地元帰着
+            </div>
+            <p class="text-stone-400 text-xs mt-0.5">身体への負担が少なく、翌日にも響かない快適解散！</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 投票アクション -->
+      <div class="p-4 bg-gradient-to-r from-amber-950/30 to-black rounded-2xl border border-amber-500/40 text-center space-y-3">
+        <p class="text-xs text-stone-300">「近場で美味しく肉を味わって早く帰りたい！」ならこちら</p>
+        <button onclick="selectPlan('A')" class="w-full py-3 px-4 rounded-xl font-bold text-sm bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 shadow-md transition-all active:scale-[0.99] flex items-center justify-center gap-2">
+          <span>👍</span> 候補A（一升瓶）に投票する
+        </button>
+      </div>
+    </div>
+
+
+    <!-- ==================== PLAN B ==================== -->
+    <div id="panel-planB" class="plan-panel hidden space-y-5 animate-fade-in">
+      <!-- 概要カード -->
+      <div class="bg-brand-card border border-brand-border rounded-2xl p-5 shadow-lg relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-28 h-28 bg-yellow-500/10 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="flex items-center gap-2 mb-2">
+          <span class="px-2.5 py-0.5 rounded-md text-xs font-bold bg-yellow-500/20 text-yellow-300 border border-yellow-500/30">候補 B</span>
+          <span class="text-xs text-stone-400">移動：車（三重県松阪市）</span>
+        </div>
+        <h3 class="text-xl font-bold font-serif text-white tracking-wide">
+          松阪「和田金」夕食プラン
+        </h3>
+        <p class="text-xs sm:text-sm text-stone-300 mt-2.5 leading-relaxed">
+          言わずと知れた松阪牛すき焼きの総本山。趣ある個室座敷にて、仲居さんが菊炭の火加減で一枚一枚丁寧に焼き上げる至高の「寿き焼」会席を静かに味わう贅沢プランです。
+        </p>
+
+        <!-- 費用ボックス -->
+        <div class="mt-4 p-3.5 bg-black/40 rounded-xl border border-brand-border/60 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <span class="text-[11px] text-stone-400">1人あたりの総費用目安</span>
+            <div class="text-lg font-bold text-yellow-300">約 26,000 〜 30,500 円</div>
+          </div>
+          <div class="text-xs text-stone-400 sm:text-right space-y-0.5 border-t sm:border-t-0 pt-1 sm:pt-0 border-white/10">
+            <div>交通費（車3等分）：約 4,000〜4,500円</div>
+            <div>夕食代（寿き焼コース＋席料）：約 22,000〜26,000円</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- タイムライン -->
+      <div class="bg-brand-card border border-brand-border rounded-2xl p-5 shadow-lg">
+        <h4 class="text-xs font-bold text-brand-gold uppercase tracking-widest mb-4 flex items-center gap-1.5">
+          <span>🕒</span> 当日のスケジュール
+        </h4>
+        <div class="relative pl-6 border-l-2 border-yellow-500/40 space-y-5 text-xs sm:text-sm">
+          <div class="relative group">
+            <div class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#101215] border-2 border-yellow-400"></div>
+            <div class="font-bold text-white flex items-center gap-2">
+              <span class="text-yellow-300 font-mono text-sm">14:00</span> 地元を出発
+            </div>
+            <p class="text-stone-400 text-xs mt-0.5">伊勢湾岸道・東名阪道・伊勢道で松阪へ直行（車で約1時間40分）</p>
+          </div>
+
+          <div class="relative group">
+            <div class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#101215] border-2 border-yellow-400"></div>
+            <div class="font-bold text-white flex items-center gap-2">
+              <span class="text-yellow-300 font-mono text-sm">15:45</span> 松阪到着・老舗街並み散策
+            </div>
+            <p class="text-stone-400 text-xs mt-0.5">豪商のまち散策やお土産（名産松阪木綿や和菓子等）を購入、優雅にお茶休憩</p>
+          </div>
+
+          <div class="relative group">
+            <div class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-yellow-400 ring-4 ring-yellow-400/20"></div>
+            <div class="font-bold text-yellow-200 flex items-center gap-2 text-sm sm:text-base">
+              <span class="text-yellow-300 font-mono">17:00</span> 「和田金」で夕食
+            </div>
+            <p class="text-stone-300 text-xs mt-0.5">完全個室。仲居さんによる給仕ですき焼きと極上の松阪牛コースを堪能（約2.5時間）</p>
+          </div>
+
+          <div class="relative group">
+            <div class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#101215] border-2 border-yellow-400"></div>
+            <div class="font-bold text-white flex items-center gap-2">
+              <span class="text-yellow-300 font-mono text-sm">19:30</span> 松阪出発
+            </div>
+            <p class="text-stone-400 text-xs mt-0.5">余韻に浸りながら車で帰路へ</p>
+          </div>
+
+          <div class="relative group">
+            <div class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#101215] border-2 border-yellow-400"></div>
+            <div class="font-bold text-white flex items-center gap-2">
+              <span class="text-yellow-300 font-mono text-sm">21:15</span> 地元帰着
+            </div>
+            <p class="text-stone-400 text-xs mt-0.5">心地よい満腹感のまま夜に無理なく帰宅！</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 投票アクション -->
+      <div class="p-4 bg-gradient-to-r from-yellow-950/30 to-black rounded-2xl border border-yellow-500/40 text-center space-y-3">
+        <p class="text-xs text-stone-300">「特別な同窓会だからこそ、最高の格式・個室で！」ならこちら</p>
+        <button onclick="selectPlan('B')" class="w-full py-3 px-4 rounded-xl font-bold text-sm bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-stone-950 shadow-md transition-all active:scale-[0.99] flex items-center justify-center gap-2">
+          <span>👍</span> 候補B（和田金）に投票する
+        </button>
+      </div>
+    </div>
+
+
+    <!-- ==================== PLAN C ==================== -->
+    <div id="panel-planC" class="plan-panel hidden space-y-5 animate-fade-in">
+      <!-- 概要カード -->
+      <div class="bg-brand-card border border-brand-border rounded-2xl p-5 shadow-lg relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-28 h-28 bg-orange-500/10 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="flex items-center gap-2 mb-2">
+          <span class="px-2.5 py-0.5 rounded-md text-xs font-bold bg-orange-500/20 text-orange-300 border border-orange-500/30">候補 C</span>
+          <span class="text-xs text-stone-400">移動：車＋JR新快速（兵庫県神戸市）</span>
+        </div>
+        <h3 class="text-xl font-bold font-serif text-white tracking-wide">
+          神戸牛ディナー＆夜景散策プラン
+        </h3>
+        <p class="text-xs sm:text-sm text-stone-300 mt-2.5 leading-relaxed">
+          名神・大津駅まで車で行き、大阪の渋滞を新快速でスキップする賢いパーク＆ライド！目の前で焼き上がる神戸牛ステーキと、港町・ハーバーランドのロマンチックな夜景を満喫する小旅行プランです。
+        </p>
+
+        <!-- 費用ボックス -->
+        <div class="mt-4 p-3.5 bg-black/40 rounded-xl border border-brand-border/60 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <span class="text-[11px] text-stone-400">1人あたりの総費用目安</span>
+            <div class="text-lg font-bold text-orange-300">約 25,000 〜 32,000 円</div>
+          </div>
+          <div class="text-xs text-stone-400 sm:text-right space-y-0.5 border-t sm:border-t-0 pt-1 sm:pt-0 border-white/10">
+            <div>交通費（車3等分＋JR往復）：約 6,500〜7,000円</div>
+            <div>夕食代（神戸牛ステーキディナー）：約 18,000〜25,000円</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- タイムライン -->
+      <div class="bg-brand-card border border-brand-border rounded-2xl p-5 shadow-lg">
+        <h4 class="text-xs font-bold text-brand-gold uppercase tracking-widest mb-4 flex items-center gap-1.5">
+          <span>🕒</span> 当日のスケジュール
+        </h4>
+        <div class="relative pl-6 border-l-2 border-orange-500/40 space-y-5 text-xs sm:text-sm">
+          <div class="relative group">
+            <div class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#101215] border-2 border-orange-400"></div>
+            <div class="font-bold text-white flex items-center gap-2">
+              <span class="text-orange-300 font-mono text-sm">12:30</span> 地元を出発
+            </div>
+            <p class="text-stone-400 text-xs mt-0.5">名神高速で大津ICへ（車で約1時間30分）</p>
+          </div>
+
+          <div class="relative group">
+            <div class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#101215] border-2 border-orange-400"></div>
+            <div class="font-bold text-white flex items-center gap-2">
+              <span class="text-orange-300 font-mono text-sm">14:00</span> JR大津駅に到着・駐車
+            </div>
+            <p class="text-stone-400 text-xs mt-0.5">駅前コインパーキングに駐車（最大料金1,000〜1,500円）</p>
+          </div>
+
+          <div class="relative group">
+            <div class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#101215] border-2 border-orange-400"></div>
+            <div class="font-bold text-white flex items-center gap-2">
+              <span class="text-orange-300 font-mono text-sm">14:17</span> 新快速（姫路方面行）に乗車
+            </div>
+            <p class="text-stone-400 text-xs mt-0.5">時速130kmで大阪の渋滞をパス！車内で全員気兼ねなくおしゃべり</p>
+          </div>
+
+          <div class="relative group">
+            <div class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#101215] border-2 border-orange-400"></div>
+            <div class="font-bold text-white flex items-center gap-2">
+              <span class="text-orange-300 font-mono text-sm">15:25</span> JR三ノ宮駅到着・街歩き
+            </div>
+            <p class="text-stone-400 text-xs mt-0.5">異国情緒あふれる旧居留地やメリケンパークをのんびり散策・カフェ休憩</p>
+          </div>
+
+          <div class="relative group">
+            <div class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-orange-400 ring-4 ring-orange-400/20"></div>
+            <div class="font-bold text-orange-200 flex items-center gap-2 text-sm sm:text-base">
+              <span class="text-orange-300 font-mono">17:30</span> 神戸牛ステーキディナー
+            </div>
+            <p class="text-stone-300 text-xs mt-0.5">三宮の鉄板焼き店で目の前でシェフがフランベする神戸牛コースを堪能（約2時間）</p>
+          </div>
+
+          <div class="relative group">
+            <div class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#101215] border-2 border-orange-400"></div>
+            <div class="font-bold text-white flex items-center gap-2">
+              <span class="text-orange-300 font-mono text-sm">19:30</span> ハーバーランド夜景散策
+            </div>
+            <p class="text-stone-400 text-xs mt-0.5">食後の腹ごなしにライトアップされた神戸港の夜景を眺めながらお土産購入</p>
+          </div>
+
+          <div class="relative group">
+            <div class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#101215] border-2 border-orange-400"></div>
+            <div class="font-bold text-white flex items-center gap-2">
+              <span class="text-orange-300 font-mono text-sm">20:08</span> JR三ノ宮駅から新快速乗車
+            </div>
+            <p class="text-stone-400 text-xs mt-0.5">大津駅へ直通で戻る（21:15着）、車に乗換えて高速へ</p>
+          </div>
+
+          <div class="relative group">
+            <div class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#101215] border-2 border-orange-400"></div>
+            <div class="font-bold text-white flex items-center gap-2">
+              <span class="text-orange-300 font-mono text-sm">22:45</span> 地元帰着
+            </div>
+            <p class="text-stone-400 text-xs mt-0.5">小旅行気分をたっぷり味わった充実の一日が終了！</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 投票アクション -->
+      <div class="p-4 bg-gradient-to-r from-orange-950/30 to-black rounded-2xl border border-orange-500/40 text-center space-y-3">
+        <p class="text-xs text-stone-300">「どうせなら小旅行気分で神戸の街と夜景も満喫したい！」ならこちら</p>
+        <button onclick="selectPlan('C')" class="w-full py-3 px-4 rounded-xl font-bold text-sm bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-stone-950 shadow-md transition-all active:scale-[0.99] flex items-center justify-center gap-2">
+          <span>👍</span> 候補C（神戸牛）に投票する
+        </button>
+      </div>
+    </div>
+
+
+    <!-- 投票結果＆LINE返信セクション -->
+    <section id="responseSection" class="bg-gradient-to-b from-[#1C2128] to-[#15191E] border border-brand-gold/40 rounded-2xl p-5 shadow-2xl relative">
+      <div class="flex items-center gap-2 text-brand-gold font-bold text-sm mb-2">
+        <span>💬</span> LINEで返信を送る
+      </div>
+      <p class="text-xs text-stone-300 leading-relaxed">
+        上のプランを選択すると、返信用のメッセージが自動で生成されます。ボタンを押してコピーし、LINEのトークに貼り付けて送信してください。
+      </p>
+
+      <!-- 選択ステータス -->
+      <div class="mt-4 p-3 bg-black/50 border border-brand-border rounded-xl">
+        <div class="text-[11px] text-stone-400 mb-1">現在のあなたの選択：</div>
+        <div id="selectedPlanLabel" class="text-sm font-bold text-brand-goldLight">
+          ※上のプランから「投票する」ボタンを押してください
+        </div>
+        <textarea id="replyText" rows="3" readonly class="w-full mt-2.5 p-2.5 bg-[#121519] border border-brand-border/60 rounded-lg text-xs text-stone-200 resize-none focus:outline-none focus:border-brand-gold">同窓会のプラン見ました！まだ選び中ですがどれも良さそうです。</textarea>
+      </div>
+
+      <!-- コピーボタン -->
+      <button onclick="copyReplyText()" id="copyBtn" class="mt-3.5 w-full py-3 px-4 rounded-xl font-bold text-sm bg-stone-800 hover:bg-stone-700 text-stone-200 border border-stone-600 shadow transition-all active:scale-[0.99] flex items-center justify-center gap-2">
+        <svg class="w-4 h-4 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+        </svg>
+        <span id="copyBtnText">返信用メッセージをコピーする</span>
+      </button>
+
+      <!-- コピー完了通知バナー（トースト） -->
+      <div id="copyToast" class="hidden mt-2 p-2 bg-emerald-950/80 border border-emerald-500/50 rounded-lg text-emerald-300 text-xs text-center font-medium">
+        ✓ クリップボードにコピーしました！LINEにそのまま貼り付けて送信してください。
+      </div>
+    </section>
+
+  </main>
+
+  <!-- スクリプト部 -->
+  <script>
+    // タブ切り替え処理
+    function switchTab(planId) {
+      // パネル切り替え
+      document.querySelectorAll('.plan-panel').forEach(panel => {
+        panel.classList.add('hidden');
+      });
+      const activePanel = document.getElementById('panel-' + planId);
+      if (activePanel) {
+        activePanel.classList.remove('hidden');
+      }
+
+      // タブボタンスタイル更新
+      const tabs = ['planA', 'planB', 'planC'];
+      tabs.forEach(id => {
+        const btn = document.getElementById('tabBtn-' + id);
+        if (id === planId) {
+          btn.className = 'tab-btn flex-1 py-2 px-2 rounded-lg text-xs font-bold transition-all duration-200 bg-brand-gold text-stone-950 shadow-md flex flex-col items-center';
+        } else {
+          btn.className = 'tab-btn flex-1 py-2 px-2 rounded-lg text-xs font-bold transition-all duration-200 text-stone-400 bg-transparent hover:text-stone-200 flex flex-col items-center';
+        }
+      });
+    }
+
+    // 初期状態はプランA
+    switchTab('planA');
+
+    // プラン選択＆返信用テキスト生成
+    function selectPlan(type) {
+      const label = document.getElementById('selectedPlanLabel');
+      const textarea = document.getElementById('replyText');
+      
+      let title = '';
+      let msg = '';
+
+      if (type === 'A') {
+        title = '【候補A】松阪「一升瓶 本店」夕食プラン（車）';
+        msg = '同窓会プラン確認しました！\n私は『候補A：松阪の一升瓶 本店』が良いと思います！\n移動も近いし、美味しい松阪牛とホルモンを気兼ねなく食べて早く帰れるのが最高です。日程調整しよう！';
+      } else if (type === 'B') {
+        title = '【候補B】松阪「和田金」夕食プラン（車）';
+        msg = '同窓会プラン確認しました！\nせっかくの3人の同窓会なので『候補B：和田金の個室寿き焼』が良いと思います！\nあの落ち着いた座敷で贅沢な時間を過ごしたいです。日程調整しよう！';
+      } else if (type === 'C') {
+        title = '【候補C】神戸牛ディナー＆夜景散策プラン（車＋新快速）';
+        msg = '同窓会プラン確認しました！\n小旅行気分で楽しめる『候補C：神戸牛ディナー＆夜景散策』に1票！\n新快速でのんびり話しながら行けるし、目の前で焼く鉄板焼きや夜景も楽しそう。日程調整しよう！';
+      }
+
+      label.innerText = title;
+      textarea.value = msg;
+
+      // 返信セクションまでスムーズスクロール
+      const target = document.getElementById('responseSection');
+      target.scrollIntoView({ behavior: 'smooth' });
+
+      // アクションボタンを強調
+      const copyBtn = document.getElementById('copyBtn');
+      copyBtn.classList.remove('bg-stone-800', 'border-stone-600');
+      copyBtn.classList.add('bg-brand-gold', 'text-stone-950', 'border-brand-gold');
+      document.getElementById('copyBtnText').innerText = '選んだ内容でLINE返信をコピーする';
+    }
+
+    // テキストコピー機能（安全なexecCommandフォールバック付き）
+    function copyReplyText() {
+      const textarea = document.getElementById('replyText');
+      textarea.select();
+      textarea.setSelectionRange(0, 99999); // モバイル対応
+
+      let success = false;
+      try {
+        success = document.execCommand('copy');
+      } catch (err) {
+        success = false;
+      }
+
+      const toast = document.getElementById('copyToast');
+      if (success) {
+        toast.classList.remove('hidden');
+        setTimeout(() => {
+          toast.classList.add('hidden');
+        }, 4000);
+      } else {
+        alert = null; // alert禁止遵守
+        toast.innerText = 'コピーに失敗しました。枠内のテキストを手動でコピーしてください。';
+        toast.classList.remove('hidden');
+      }
+    }
+  </script>
+</body>
+</html>
